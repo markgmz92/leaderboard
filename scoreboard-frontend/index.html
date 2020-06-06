@@ -3,6 +3,33 @@
   integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
   crossorigin="anonymous">
 </script>
+
+<script>
+    console.log("before JQuery")
+    $(document).ready(function() {
+      $.ajax('http://localhost:1337/games?title=SuperMegaGame', {
+        success: function(data){
+          console.log("jQuery.success data", data)
+          $(data[0].scores).each(function(i, entry){
+            const {player, score} = entry
+  
+            const scoreCard = `
+            <div class="scoreCard">
+                <p>Player: ${player} </p>
+                <p>Score: ${score} </p>
+            </div>
+            `
+  
+            $('.container').append(scoreCard)
+            
+          })
+        }
+      })
+    })
+
+</script>
+
+  
 <style>
     * {
         font-family: Helvetica, sans-serif;
@@ -22,7 +49,7 @@
 
 <div class="container">
     <h1>ScoreBoard for supermega game</h1>
-        <div class="scorecard">
+        <div class="scoreCard">
             <p>Player: Alex</p>
             <p>Score: 300</p>
     </div>
